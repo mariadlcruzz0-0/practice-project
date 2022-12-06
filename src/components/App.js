@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Provider } from './Context';
 import Header from './Header';
 import PlayerList from './PlayerList';
 import AddPlayerForm from './AddPlayerForm';
@@ -63,17 +64,21 @@ class App extends Component {
 
   render() {
     return (
-      <div className="scoreboard">
-        <Header players={this.state.players} />
+      //value prop allows it to share data
+      <Provider value={{
+        players: this.state.players
+      }} >
+        <div className="scoreboard">
+          <Header />
 
-        <PlayerList 
-          players={this.state.players} 
-          changeScore={this.handleScoreChange}
-          removePlayer={this.handleRemovePlayer}   
-        />
-        
-        <AddPlayerForm addPlayer={this.handleAddPlayer} />
-      </div>
+          <PlayerList 
+            changeScore={this.handleScoreChange}
+            removePlayer={this.handleRemovePlayer}   
+          />
+          
+          <AddPlayerForm addPlayer={this.handleAddPlayer} />
+        </div>
+      </Provider>
     );
   }
 }
