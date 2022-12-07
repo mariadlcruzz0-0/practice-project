@@ -6,17 +6,13 @@ import Counter from './Counter';
 class Player extends PureComponent {
 
   static propTypes = {
-    name: PropTypes.string.isRequired,
-    score: PropTypes.number.isRequired,
-    id: PropTypes.number.isRequired,
+    //Properties
     index: PropTypes.number.isRequired
   };
 
   render() {
-    
+    //distructing assignment
     const { 
-      name,
-      id,
       score,
       index
     } = this.props;
@@ -24,18 +20,15 @@ class Player extends PureComponent {
     return (
       <div className="player">
         <Consumer>
-          { ({ actions }) => (
+          { ({ actions, players }) => (
             <span className="player-name">
-              <button className="remove-player" onClick={() => actions.removePlayer(id)}>✖</button>
+              <button className="remove-player" onClick={() => actions.removePlayer(players[index].id)}>✖</button>
               { name }
           </span>
           )}
         </Consumer>
 
-        <Counter 
-          score={score}
-          index={index}
-        />
+        <Counter index={index} />
       </div>
     );
   }
